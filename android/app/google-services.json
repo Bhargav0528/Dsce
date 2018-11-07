@@ -1,0 +1,107 @@
+{
+  "project_info": {
+    "project_number": "359041235154",
+    "firebase_url": "https://dsceapp-5ed7f.firebaseio.com",
+    "project_id": "dsceapp-5ed7f",
+    "storage_bucket": "dsceapp-5ed7f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359041235154:android:57ac7f369d61cb51",
+        "android_client_info": {
+          "package_name": "com.dsceapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "359041235154-vjv5ek6u2itmsc086jjp44hoooasc8q4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dsceapp",
+            "certificate_hash": "d409074ead5580d233b1ad06124a1ed7b9af63da"
+          }
+        },
+        {
+          "client_id": "359041235154-mo8k9bm72liv2sgsqguqgu23e6sjksug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGhhdssczmhFqKdKkqwreOnVm8AWZnxDQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359041235154-mo8k9bm72liv2sgsqguqgu23e6sjksug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359041235154:android:6b2046ba671da064",
+        "android_client_info": {
+          "package_name": "com.example.bharg.dsce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "359041235154-3cuoamv2icqa2fr4k75l89o70eetpnc6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bharg.dsce",
+            "certificate_hash": "b356da13381f761812cb4d7ab5270ecdc34de718"
+          }
+        },
+        {
+          "client_id": "359041235154-0jc4pim15j2nosjdukrpuj237j84r2a2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bharg.dsce",
+            "certificate_hash": "d409074ead5580d233b1ad06124a1ed7b9af63da"
+          }
+        },
+        {
+          "client_id": "359041235154-mo8k9bm72liv2sgsqguqgu23e6sjksug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGhhdssczmhFqKdKkqwreOnVm8AWZnxDQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359041235154-mo8k9bm72liv2sgsqguqgu23e6sjksug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
