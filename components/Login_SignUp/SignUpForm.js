@@ -14,6 +14,11 @@ import { Button, Card, Input, InputForm, Spinner, InputPicker } from '../common'
 import MainScreen from '../Screens/MainScreen';
 import firebase from 'firebase';
 
+
+//TODO --------> Change name of the app , branch changes
+
+
+
 export default class SignUpForm extends Component {
   state = { setup: null, username: '', sem:'1', section:'', branch:'computer_science' };
   componentWillMount() {
@@ -83,7 +88,9 @@ export default class SignUpForm extends Component {
           <ImageBackground source={require('../../Resources/Images/gradien2.jpg')} style={{flex :2,width:'100%', alignItems:'center', justifyContent:'center'}} >
               <Image source={require('../../Resources/Images/dsce_logo.png')} style={{width:100, height:100}} />
               <Text style={{fontSize:36, color:'#fff'}}>Dsce App</Text>
-              <Text style={{fontSize:22, color:'#fff'}}>Notes, Forums, Events and more</Text>
+              <View style={{alignItems:'center'}}>
+              <Text style={{fontSize:16, color:'#fff'}}>Notifications, Event Alerts and Notes</Text>
+              </View>
           </ImageBackground>
 
           <View  style={{ flex: 3 , backgroundColor:'#fff', alignItems: 'center', marginTop:30}}>
@@ -137,12 +144,12 @@ export default class SignUpForm extends Component {
           borderColor: '#000',
           paddingLeft: 30,
           paddingRight: 30,
-          backgroundColor: '#fff',
+          backgroundColor: '#000',
           color: '#ffffff',
           elevation: 12,
           marginTop:40
         }}>
-        {<Text style={{ color: '#000' }}>Submit</Text>}
+        {<Text style={{ color: '#fff' }}>Submit</Text>}
       </Button>
       <Button
         btpress={this.gotoHome.bind(this)}
@@ -152,12 +159,12 @@ export default class SignUpForm extends Component {
           borderColor: '#000',
           paddingLeft: 30,
           paddingRight: 30,
-          backgroundColor: '#fff',
+          backgroundColor: '#000',
           color: '#ffffff',
           elevation: 12,
           marginTop:40
         }}>
-        {<Text style={{ color: '#000' }}>Go Back</Text>}
+        {<Text style={{ color: '#fff' }}>Go Back</Text>}
       </Button>
       </View>
             </View>

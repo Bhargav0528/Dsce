@@ -101,8 +101,8 @@ class NotificationList extends React.Component {
       <TouchableOpacity onPress={this.showDescription.bind(this)} >
       {this.DescriptionModal()}
       <Card style={cardViewStyle}>
-      <View style={{ justifyContent:'center',width:'15%',borderRadius: 10,}}>
-        <View style={{height:50,padding:5, justifyContent:'center'}}>
+      <View style={{ justifyContent:'center',width:'15%',borderTopLeftRadius: 10,borderBottomLeftRadius:10, backgroundColor:'#272727'}}>
+        <View style={{height:50,padding:5, justifyContent:'center',backgroundColor:'#272727'}}>
           <Image source={imgArray[parseInt(data.category)]} style={{width:undefined,height:undefined, flex:1, tintColor:colorArray[parseInt(data.category)]}} resizeMode='contain'/>
         </View>
         </View>

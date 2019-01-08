@@ -89,8 +89,9 @@ export default class FacultyLogin extends Component {
       case true:
         return (
           <View style={{flex:1, backgroundColor:'#fff', alignItems: 'center', justifyContent:'space-around'}}>
-          <View style={{height:'30%',width:'100%', alignItems:'center', justifyContent:'center'}}>
+          <View style={{height:'40%',width:'100%', alignItems:'center', justifyContent:'center'}}>
           <ImageBackground source={require('../../Resources/Images/gradien2.jpg')} style={{height:'100%',width:'100%', alignItems:'center', justifyContent:'center'}} >
+              <Image source={require('../../Resources/Images/dsce_logo.png')} style={{width:100, height:100}} />
               <Text style={{fontSize:36, color:'#fff'}}>Dsce App</Text>
               <Text style={{fontSize:22, color:'#fff'}}>Faculty Login</Text>
           </ImageBackground>
@@ -152,6 +153,7 @@ export default class FacultyLogin extends Component {
           
           <View style={{ flex: 1 , backgroundColor:'#fff', alignItems: 'center', justifyContent:'space-around'}}>
           <ImageBackground source={require('../../Resources/Images/gradien2.jpg')} style={{flex :2,width:'100%', alignItems:'center', justifyContent:'center'}} >
+          <Image source={require('../../Resources/Images/dsce_logo.png')} style={{width:100, height:100}} />          
               <Text style={{fontSize:36, color:'#fff'}}>Dsce App</Text>
               <Text style={{fontSize:22, color:'#fff'}}>Faculty Login</Text>
           </ImageBackground>

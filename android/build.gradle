@@ -42,4 +42,3 @@ ext {
     targetSdkVersion = 26
     supportLibVersion = "26.1.0"
 }
-

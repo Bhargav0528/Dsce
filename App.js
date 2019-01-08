@@ -172,6 +172,7 @@ const chckReadPermission = PermissionsAndroid.check(PermissionsAndroid.PERMISSIO
 };
   
   renderScreens() {
+    console.log("111goinggg",this.state.loggedIn)
     switch (this.state.loggedIn) {
       case null:
         return <Spinner />;
@@ -184,14 +185,17 @@ const chckReadPermission = PermissionsAndroid.check(PermissionsAndroid.PERMISSIO
         else
         return <UserNavigation />;
       case false:
+      {
+        console.log("121goinggg")
         return <Stack />;
+      }
     }
   }
 
   render() {
     console.log("InfoSetup",this.state.infoSetup)
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ width:'100%', height:'100%' }}>
         {this.renderScreens()}
       </View>
     );

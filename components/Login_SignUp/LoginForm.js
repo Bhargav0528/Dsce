@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import { View, Image, Text, ImageBackground,TextInput, StyleSheet,PixelRatio, TouchableOpacity, ToastAndroid, ScrollView } from 'react-native';
+import { View, Image, Text, ImageBackground,TextInput, Keyboard,PixelRatio, TouchableOpacity, ToastAndroid, TouchableWithoutFeedback } from 'react-native';
 import { CardSection, Button, Card, Input, Spinner } from '../common';
 import MainScreen from '../Screens/MainScreen';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import { KeyboardAwareView } from 'react-native-keyboard-aware-view'
 import firebase from 'firebase';
+
+//TODO -----> All designs Done ( Color Changes if Required )
+
+
+
 export default class LoginForm extends Component {
   state = { loginPress: true, email: '', password: '', backgroundColor:'', gestureName: 'none', usn:'', loginSpinner:false };
   f = 1;
@@ -26,6 +32,9 @@ export default class LoginForm extends Component {
     };
 
     return ( 
+      <KeyboardAwareView animated={true} style={{flex:1}}>
+      <TouchableWithoutFeedback style={{width:'100%',height:'100%',backgroundColor: '#4857cb',flexDirection: 'column'}} 
+                                                  onPress={Keyboard.dismiss}>
       <GestureRecognizer
         onSwipeLeft={(state) => this.onSwipeLeft(state)}
         onSwipeRight={(state) => this.onSwipeRight(state)}
@@ -34,6 +43,7 @@ export default class LoginForm extends Component {
           flex: 1,
         }}
         >
+        
       <ImageBackground
         source={require('../../Resources/Images/background_text5.png')}
         style={
@@ -56,7 +66,7 @@ export default class LoginForm extends Component {
         />
         </View>
         
-        <View style={{flex:3,alignItems:'center'}}>
+        <View style={{flex:3,alignItems:'center', width:'85%'}}>
         <Card
           style={{
             flexDirection: 'column',
@@ -64,7 +74,8 @@ export default class LoginForm extends Component {
             borderRadius: 20,
             borderWidth: 1,
             borderColor: '#fff',
-            flex:3
+            flex:3,
+            width:'100%'
           }}>
           <Card
             style={{
@@ -109,7 +120,11 @@ export default class LoginForm extends Component {
         </Card>
         </View>
       </ImageBackground>
+      
+
       </GestureRecognizer>
+      </TouchableWithoutFeedback>
+      </KeyboardAwareView>
     );
   }
 
@@ -189,11 +204,12 @@ export default class LoginForm extends Component {
           borderColor: '#000',
           paddingLeft: 30,
           paddingRight: 30,
-          backgroundColor: '#fff',
+          backgroundColor: '#000',
           color: '#ffffff',
           elevation: 6,
+          width:'90%'
         }}>
-        {<Text style={{ color: '#000', width:this.f*100 }}>SignUp</Text>}
+        {<Text style={{ color: '#fff', width:this.f*100 }}>SignUp</Text>}
       </Button>
     );
   }
@@ -201,7 +217,7 @@ export default class LoginForm extends Component {
     if(this.state.loginSpinner==false)
     {
     return (
-      <View style={{flexDirection:'row'}}>
+      
       <Button
         btpress={this.firebaseSignIn.bind(this)}
         style={{
@@ -210,13 +226,13 @@ export default class LoginForm extends Component {
           borderColor: '#000',
           paddingLeft: 30,
           paddingRight: 30,
-          backgroundColor: '#fff',
+          backgroundColor: '#000',
           color: '#ffffff',
-          elevation: 6,
+          elevation: 2,
+          width:'90%',
         }}>
-        {<Text style={{ color: '#000', width:100 }}>Login</Text>}
+        {<Text style={{ color: '#fff', width:100, fontSize:17 }}>Sign In</Text>}
       </Button>
-      </View>
     )
     }
     else{
@@ -233,7 +249,7 @@ export default class LoginForm extends Component {
   renderTabs() {
     if (this.state.loginPress) {
       return (
-        <View>
+        <View style={{flex:1}}>
         <View>
           <Card
             style={{
@@ -249,7 +265,8 @@ export default class LoginForm extends Component {
               />
 
               <Input
-              style={{borderRadius: 20}}
+
+              style={{borderRadius: 20,width:'80%', alignItems:'center'}}
               placeholder="Email"
               onChangeText={email => this.setState({ email: email })}
               value={this.state.email}
@@ -272,7 +289,7 @@ export default class LoginForm extends Component {
           />
             
             <Input
-              style={{borderRadius: 20}}
+              style={{borderRadius: 20,width:'80%', alignItems:'center'}}
               placeholder="Password"
               onChangeText={password => this.setState({ password: password })}
               value={this.state.password}
@@ -285,7 +302,7 @@ export default class LoginForm extends Component {
         </View>
         
           
-          <CardSection style={{ justifyContent: 'center' }}>
+          <CardSection style={{ justifyContent: 'center', alignItems:'center' }}>
             {this.renderButtonSignIn()}
           </CardSection>
 
@@ -300,7 +317,7 @@ export default class LoginForm extends Component {
                 paddingRight:7,
                 borderColor: '#000',
                 backgroundColor: '#fff',
-                color: '#ffffff',
+                color: '#000',
                 elevation: 6,
               }}>
         {<Text style={{ color: '#000' }}>Faculty Login </Text>}
@@ -340,7 +357,7 @@ export default class LoginForm extends Component {
             style={{ height: 50, width: 50, backgroundColor: '#fff',borderRadius: 20 }}
           />
           <Input
-            style={{borderRadius: 20}}
+            style={{borderRadius: 20, width:'80%', alignItems:'center'}}
             placeholder="USN"
             onChangeText={usn => this.setState({ usn: usn })}
             value={this.state.usn}
@@ -358,7 +375,7 @@ export default class LoginForm extends Component {
             style={{ height: 50, width: 50, backgroundColor: '#fff',borderRadius: 20 }}
           />
           <Input
-            style={{borderRadius: 20}}
+            style={{borderRadius: 20, width:'80%', alignItems:'center'}}
             placeholder="Email"
             onChangeText={email => this.setState({ email: email })}
             value={this.state.email}
@@ -377,7 +394,7 @@ export default class LoginForm extends Component {
             style={{ height: 50, width: 50, backgroundColor: '#fff',borderRadius: 20 }}
           />
           <Input
-            style={{borderRadius: 20}}
+            style={{borderRadius: 20, width:'80%', alignItems:'center'}}
             placeholder="Password"
             onChangeText={password => this.setState({ password: password })}
             value={this.state.password}
