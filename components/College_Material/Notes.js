@@ -213,6 +213,7 @@ class Notes extends Component {
 
   showModuleDescription(){
     try {
+      let color = true;
       if (this.state.subjects != null && typeof this.state.subjects[this.state.modal.noti][this.state.modal.mod] !== "undefined"){
         console.log("Notes true", this.state.subjects[this.state.modal.noti][this.state.modal.mod])
         chapters = Object.keys(this.state.subjects[this.state.modal.noti][this.state.modal.mod])
@@ -228,25 +229,30 @@ class Notes extends Component {
                 onRequestClose={ () => { this.Show_Custom_Alert(!this.state.Alert_Visibility)} } 
                 >
       
-          <View  style={{height:'100%',justifyContent: 'center' ,alignItems: 'center',
-          left: 0,
-          top: 0,
+          <View  style={{height:'100%',width:'100%',justifyContent: 'center' ,alignItems: 'center',
           backgroundColor: '#00000070'}}>
-      
-          <Card style={{height:'60%', width:'100%', alignItems:'center', flexDirection:'column'}}>
+          <View  style={{height:'80%', width:'80%'}}>
+          <Card style={{height:'100%', width:'100%', alignItems:'center', flexDirection:'column', borderRadius:20}}>
           <Text style={{fontSize:16, color:'#000', margin:10}}>{this.state.modal.mod}</Text>
-          <ScrollView  style={{flex:1, width:'60%'}}>
+          <ScrollView  style={{flex:1, width:'100%'}}>
       
           {
             
             Object.values(this.state.subjects[this.state.modal.noti][this.state.modal.mod]).map(chaps => {
             //console.log(chaps, this.state.subjects[this.state.modal.noti][this.state.modal.mod][chaps].url)
+            if(color)
+            {
+              color = false;
+            }
+            else{
+              color=true;
+            }
             return (
-            
-                <TouchableOpacity style={{marginBottom:10, elevation:11}} 
+
+                <TouchableOpacity style={{ elevation:11, width:'100%',borderBottomWidth:1,borderBottomColor:'#d3d3d3'}} 
                 onPress={this.download.bind(this,chaps.url,chaps.subject, chaps.module, chaps.name+'.'+chaps.mime)}>
-                  <View style={{ borderRadius:15, borderWidth:2, borderColor:'#000'}}>
-                  <Text style={{color:'#000', padding:10}}>{chaps.name}</Text>
+                  <View style={{backgroundColor:(color)?'orange':'#FFE0B2',height:60, alignItems:'center',justifyContent:'center'}}>
+                  <Text style={{color:'#000',fontSize:22}}>{chaps.name}</Text>
                   </View>
                 </TouchableOpacity>
             
@@ -258,6 +264,7 @@ class Notes extends Component {
           
          </ScrollView>
          </Card>
+         </View>
          </View>
          </Modal>
           )

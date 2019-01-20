@@ -16,6 +16,7 @@ import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-ta
 import firebase from 'firebase';
 import PinchZoomView from 'react-native-pinch-zoom-view';
 import { Firebase } from 'react-native-firebase';
+import Orientation from 'react-native-screen-orientation';
 
 export default class TimeTable extends Component{
   static navigationOptions = {
@@ -54,6 +55,7 @@ componentWillMount() {
   }
 
 componentWillUnmount() {
+  Orientation.unlockAllOrientations();
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
 }
 
@@ -89,6 +91,7 @@ handleBackButtonClick() {
   }
 
  componentDidMount(){
+  Orientation.lockToLandscape();
     console.log('Calleddd?')
     firebase.database().ref(`branch/${this.state.user.branch}`).on('value', (snapshot)=>{ 
       firebase.database().ref().child('users').child(firebase.auth().currentUser.uid).on('value', (snap)=>{
