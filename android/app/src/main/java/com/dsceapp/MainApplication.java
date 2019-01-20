@@ -18,6 +18,7 @@ import com.RNFetchBlob.RNFetchBlobPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
+import com.github.yamill.orientation.OrientationPackage; 
 
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.facebook.react.ReactNativeHost;
@@ -47,7 +48,8 @@ public class MainApplication extends Application implements ReactApplication {
             new ReactNativeDocumentPicker(),
             new ReactNativeOneSignalPackage(),
               new RNFirebaseMessagingPackage(),
-              new RNFirebaseNotificationsPackage()
+              new RNFirebaseNotificationsPackage(),
+              new OrientationPackage()
       );
     }
 

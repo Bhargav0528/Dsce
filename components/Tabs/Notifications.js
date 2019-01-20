@@ -1,16 +1,45 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, TouchableOpacity, Image,Modal, Alert, StyleSheet,Platform, Picker } from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity, Image,Modal, Alert, StyleSheet,Platform, Picker, RefreshControl } from 'react-native';
 import { Card, CardSection, InputForm, InputPicker  } from '../common';
 import firebase from 'firebase'; 
 
 import NotificationList from './NotificationList';
 class Notifications extends Component {
-  state = { notifications:'', faculty: false,Alert_Visibility: false, category:0, description:'', text:'' };
+  state = { notifications:'', faculty: false,Alert_Visibility: false, category:0, description:'', text:'',refreshing: false };
   
   
   renderNotifications(){
     if(this.state.notifications != '')
     return Object.values(this.state.notifications).map(noti => <NotificationList data={noti} key={noti.text} />)
+  }
+
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+
+    firebase.database().ref().child('news').on('value', (snapshot)=>{
+      firebase.database().ref().child('users').child(firebase.auth().currentUser.uid).on('value', (snap)=>{
+      
+      var notifications = [];
+      snapshot.forEach((child) => {
+        notifications.push({
+          category: child.val().category,
+          description: child.val().description,
+          text: child.val().text,
+          year:child.val().year,
+          month:child.val().month,
+          date:child.val().date,
+          hour:child.val().hour,
+          minutes:child.val().minutes
+        });
+      });
+      
+
+
+  
+      this.setState({
+       notifications:notifications, faculty:snap.val().faculty, refreshing:false});
+      });
+    });
   }
 
   sendNotification(){
@@ -150,7 +179,12 @@ class Notifications extends Component {
 
     return (
       <View style={{flex:1 , backgroundColor:'#EEEEEE'}}>
-      <ScrollView style={{flex:1}}>
+      <ScrollView style={{flex:1}} refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh}
+          />
+        }>
         { this.renderNotifications() }
         { this.showEventDescription() }
       </ScrollView>
@@ -183,7 +217,6 @@ class Notifications extends Component {
 
   
       this.setState({
-        
        notifications:notifications, faculty:snap.val().faculty});
       });
     });

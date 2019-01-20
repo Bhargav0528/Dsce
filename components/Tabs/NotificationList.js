@@ -23,20 +23,20 @@ class NotificationList extends React.Component {
           transparent={true}
           animationType={"fade"}
           onRequestClose={ () => { this.closeDescription(!this.state.DescriptionVisibility)} } >
-    <View style={{flex:1,justifyContent: 'center' ,alignItems: 'center',
-    left: 0,
-    top: 0,
+    <View style={{justifyContent: 'center' ,alignItems: 'center',
     backgroundColor: '#00000070',width:'100%', height:'100%'}}>
-    <Card style={{ width:'100%', height:'50%',flexDirection:'column', alignItems: 'center', justifyContent: 'center', borderRadius:25, borderWidth:0,borderColor:'orange'}}>
+    <View style={{width:'70%',height:'40%',alignItems:'center',justifyContent:'center'}}>
+    <Card style={{ width:'100%', height:'100%',flexDirection:'column', alignItems: 'center', justifyContent: 'center', borderRadius:25, borderWidth:0,borderColor:'orange'}}>
       
       <View style={{height:'50%',width:'100%', backgroundColor:'orange', borderTopLeftRadius:25, borderTopRightRadius:25, justifyContent:'center', alignItems:'center'}} >
-      <Text style={{color:'#000', padding:10, fontSize:22}}>{data.text}</Text>
+      <Text style={{color:'#000', padding:10, fontSize:22, textAlign:'center'}}>{data.text}</Text>
       </View>
       <View style={{height:'50%'}}>
-      <Text style={{color:'#000', padding:10, fontSize:18,}}>{data.description}</Text>
+      <Text style={{color:'#000', padding:10, fontSize:16,textAlign:'center'}}>{data.description}</Text>
       </View>
     
    </Card>
+   </View>
    </View>
    </Modal>
    </View>
@@ -103,7 +103,7 @@ class NotificationList extends React.Component {
       <Card style={cardViewStyle}>
       <View style={{ justifyContent:'center',width:'15%',borderTopLeftRadius: 10,borderBottomLeftRadius:10, backgroundColor:'#272727'}}>
         <View style={{height:50,padding:5, justifyContent:'center',backgroundColor:'#272727'}}>
-          <Image source={imgArray[parseInt(data.category)]} style={{width:undefined,height:undefined, flex:1, tintColor:colorArray[parseInt(data.category)]}} resizeMode='contain'/>
+          <Image source={imgArray[parseInt(data.category)]} style={{width:undefined,height:undefined, flex:1, tintColor:'orange'}} resizeMode='contain'/>
         </View>
         </View>
         <CardSection style={{backgroundColor : '#fff', flexDirection:'column', borderRadius: 10,width:'90%'}}>
@@ -114,7 +114,9 @@ class NotificationList extends React.Component {
           <View style={{width:'95%'}}>
           <Text  numberOfLines={2} ellipsizeMode="tail" style={{paddingRight:10}}>{description}</Text>
           </View>
+         
         </CardSection>
+        
       </Card>
       </TouchableOpacity>
       );

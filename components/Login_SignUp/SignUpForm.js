@@ -105,10 +105,6 @@ export default class SignUpForm extends Component {
               onValueChange= {(itemValue, itemIndex) => this.setState({branch: itemValue})}
               label="Branch">
               <Picker.Item label="Computer Science" value="computer_science" />
-              <Picker.Item label="Information Science" value="information_science" />
-              <Picker.Item label="Civi Engineering" value="civil_engg" />
-              <Picker.Item label="Mechanincal Engineering" value="mech_engg" />
-              <Picker.Item label="Electronics and Communication" value="ec_engg" />
             </InputPicker>
 
             <InputPicker
@@ -141,30 +137,30 @@ export default class SignUpForm extends Component {
         style={{
           borderRadius: 20,
           borderWidth: 2,
-          borderColor: '#000',
+          borderColor: '#FFE0B2',
           paddingLeft: 30,
           paddingRight: 30,
-          backgroundColor: '#000',
+          backgroundColor: '#FFE0B2',
           color: '#ffffff',
           elevation: 12,
           marginTop:40
         }}>
-        {<Text style={{ color: '#fff' }}>Submit</Text>}
+        {<Text style={{ color: '#272727' }}>Submit</Text>}
       </Button>
       <Button
         btpress={this.gotoHome.bind(this)}
         style={{
           borderRadius: 20,
           borderWidth: 2,
-          borderColor: '#000',
+          borderColor: '#FFE0B2',
           paddingLeft: 30,
           paddingRight: 30,
-          backgroundColor: '#000',
+          backgroundColor: '#FFE0B2',
           color: '#ffffff',
           elevation: 12,
           marginTop:40
         }}>
-        {<Text style={{ color: '#fff' }}>Go Back</Text>}
+        {<Text style={{ color: '#272727' }}>Go Back</Text>}
       </Button>
       </View>
             </View>

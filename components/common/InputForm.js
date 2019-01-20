@@ -33,16 +33,16 @@ const styles = {
     padding: 5,
     color:'#fff',
     borderRadius:20,
-    backgroundColor: '#272727',
+    backgroundColor: '#F57C00',
   },
   containerStyle2: {
     width:100,
-    backgroundColor: '#272727',
+    backgroundColor: '#F57C00',
     alignItems: 'center',
     borderRightWidth: 1,
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
-    borderColor: '#757575',
+    borderColor: '#F57C00',
     justifyContent:'center'
   },
   containerStyle: {

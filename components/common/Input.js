@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, KeyboardAvoidingView } from 'react-native';
-
+import { View, Text, TextInput, KeyboardAvoidingView, LinearGradient } from 'react-native';
 const Input = props => {
   return (
     <View style={[styles.containerStyle, props.style]}>
@@ -37,6 +36,9 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
   },
+  container: {
+    backgroundColor: '#eafcff',
+},
 };
 
 export  {Input};

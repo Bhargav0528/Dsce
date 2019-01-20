@@ -122,10 +122,6 @@ export default class FacultyLogin extends Component {
               onValueChange= {(itemValue, itemIndex) => this.setState({branch: itemValue})}
               label="Branch">
               <Picker.Item label="Computer Science" value="computer_science" />
-              <Picker.Item label="Information Science" value="information_science" />
-              <Picker.Item label="Civi Engineering" value="civil_engg" />
-              <Picker.Item label="Mechanincal Engineering" value="mech_engg" />
-              <Picker.Item label="Electronics and Communication" value="ec_engg" />
             </InputPicker>
 
             <Button

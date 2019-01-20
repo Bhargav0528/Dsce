@@ -19,6 +19,7 @@
     "react-native-onesignal": "^3.2.6",
     "react-native-pinch-zoom-view": "^0.1.7",
     "react-native-pure-chart": "0.0.24",
+    "react-native-screen-orientation": "^1.1.0",
     "react-native-swipe-gestures": "^1.0.2",
     "react-native-table-component": "^1.1.8",
     "react-native-view-editor": "^1.1.0",

@@ -11,7 +11,15 @@ import firebase from 'firebase';
 
 
 export default class LoginForm extends Component {
-  state = { loginPress: true, email: '', password: '', backgroundColor:'', gestureName: 'none', usn:'', loginSpinner:false };
+  state = { 
+    loginPress: true, 
+    email: '', 
+    password: '', 
+    backgroundColor:'', 
+    gestureName: 'none', 
+    usn:'', 
+    loginSpinner:false, 
+    usns:"" };
   f = 1;
   constructor(props) {
     super(props);
@@ -22,6 +30,22 @@ export default class LoginForm extends Component {
     title: 'Welcome',
     header: null,
   };
+
+  componentDidMount() {
+    firebase.database().ref().child('users').on('value', (snapshot)=>{
+      
+      usn_arr = []
+      Object.values(snapshot.val()).map(user=>{
+        if(user.usn!=null)
+        usn_arr.push(user.usn)
+      })
+      console.log(usn_arr)
+      this.setState({
+       usns:usn_arr});
+      });
+    
+    }
+  
   
   /** Main Render Method */
   render() {
@@ -140,27 +164,60 @@ export default class LoginForm extends Component {
     this.setState({ loginPress: false, email: '', password: '' });
   }
 
+  usn_unique(usn_upper)
+  {
+    if(this.state.usns.includes(usn_upper))
+    {
+      return true;
+    }
+    else 
+      return false;
+  }
+
   //Firebase methods
   firebaseSignUp() {
     const { navigate } = this.props.navigation;
+
+    if(this.state.usn=="")
+    {
+      ToastAndroid.show('Invalid Credentials', ToastAndroid.SHORT);
+      return;
+    }
+
+
+    const usn_upper = this.state.usn.toUpperCase()
+
+    
+
+    is_usn_unique = this.usn_unique(usn_upper)
+    
+    if(!is_usn_unique){
     firebase.auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
-            const usn_upper = this.state.usn.toUpperCase()
+            {
             const uid = firebase.auth().currentUser.uid
             firebase.database().ref().child('users').child(uid).set({
              email: this.state.email,
              infoSetup: false,
              usn: usn_upper
             })
-            
+            .then(()=>{navigate('SignUpForm', { screen: 'SignUpForm' })})
+            .catch(() => {
+              //Function Binding is very necessary in JS as onLoginFail is not bound to the class
+              ToastAndroid.show('Invalid Credentials', ToastAndroid.SHORT);
+            });
+          }
           
-      })
-      .then(()=>{navigate('SignUpForm', { screen: 'SignUpForm' })})
-      .catch(() => {
-        //Function Binding is very necessary in JS as onLoginFail is not bound to the class
-        ToastAndroid.show('Invalid Credentials', ToastAndroid.SHORT);
-      });
+          }
+          )
+        }
+        else
+        {
+          ToastAndroid.show('Duplicate USN Found', ToastAndroid.SHORT);
+        }
+      
+          
   }
   firebaseSignIn() {
     const { navigate } = this.props.navigation;
@@ -201,10 +258,10 @@ export default class LoginForm extends Component {
         style={{
           borderRadius: 20,
           borderWidth: 2,
-          borderColor: '#000',
+          borderColor: '#f5861f',
           paddingLeft: 30,
           paddingRight: 30,
-          backgroundColor: '#000',
+          backgroundColor: '#f5861f',
           color: '#ffffff',
           elevation: 6,
           width:'90%'
@@ -223,10 +280,10 @@ export default class LoginForm extends Component {
         style={{
           borderRadius: 20,
           borderWidth: 2,
-          borderColor: '#000',
+          borderColor: '#f5861f',
           paddingLeft: 30,
           paddingRight: 30,
-          backgroundColor: '#000',
+          backgroundColor: '#f5861f',
           color: '#ffffff',
           elevation: 2,
           width:'90%',
@@ -261,7 +318,7 @@ export default class LoginForm extends Component {
             }}>
             <Image
             source={require('../../Resources/Images/email.png')}
-            style={{ height: 50, width: 50, backgroundColor: '#fff',borderRadius: 20 }}
+            style={{ height: 50, width: 50, backgroundColor: '#fff',borderRadius: 20,tintColor:'orange' }}
               />
 
               <Input
@@ -285,7 +342,7 @@ export default class LoginForm extends Component {
             }}>
             <Image
             source={require('../../Resources/Images/password.png')}
-            style={{ height: 50, width: 50, backgroundColor: '#fff',borderRadius: 20 }}
+            style={{ height: 50, width: 50, backgroundColor: '#fff',borderRadius: 20,tintColor:'orange'  }}
           />
             
             <Input
@@ -315,8 +372,8 @@ export default class LoginForm extends Component {
                 borderWidth: 2,
                 paddingLeft:7,
                 paddingRight:7,
-                borderColor: '#000',
-                backgroundColor: '#fff',
+                borderColor: '#FFE0B2',
+                backgroundColor: '#FFE0B2',
                 color: '#000',
                 elevation: 6,
               }}>
@@ -331,8 +388,8 @@ export default class LoginForm extends Component {
                 borderWidth: 2,
                 paddingLeft:5,
                 paddingRight:5,
-                borderColor: '#000',
-                backgroundColor: '#fff',
+                borderColor: '#FFE0B2',
+                backgroundColor: '#FFE0B2',
                 color: '#ffffff',
                 elevation: 6,
               }}>
@@ -354,7 +411,7 @@ export default class LoginForm extends Component {
           }}>
           <Image
             source={require('../../Resources/Images/user.png')}
-            style={{ height: 50, width: 50, backgroundColor: '#fff',borderRadius: 20 }}
+            style={{ height: 50, width: 50, backgroundColor: '#fff',borderRadius: 20 ,tintColor:'orange'}}
           />
           <Input
             style={{borderRadius: 20, width:'80%', alignItems:'center'}}
@@ -369,10 +426,11 @@ export default class LoginForm extends Component {
             borderWidth: 1,
             borderColor: '#fff',
             elevation: 8,
+            justifyContent:'space-between'
           }}>
           <Image
             source={require('../../Resources/Images/email.png')}
-            style={{ height: 50, width: 50, backgroundColor: '#fff',borderRadius: 20 }}
+            style={{ height: 50, width: 50, backgroundColor: '#fff',borderRadius: 20,tintColor:'orange' }}
           />
           <Input
             style={{borderRadius: 20, width:'80%', alignItems:'center'}}
@@ -391,7 +449,7 @@ export default class LoginForm extends Component {
           }}>
           <Image
             source={require('../../Resources/Images/password.png')}
-            style={{ height: 50, width: 50, backgroundColor: '#fff',borderRadius: 20 }}
+            style={{ height: 50, width: 50, backgroundColor: '#fff',borderRadius: 20,tintColor:'orange' }}
           />
           <Input
             style={{borderRadius: 20, width:'80%', alignItems:'center'}}
@@ -409,7 +467,8 @@ export default class LoginForm extends Component {
   }
 
   //Under Line for Tabs
-
+  
+  
   renderUnderlineLogin() {
     if (this.state.loginPress) {
       return (

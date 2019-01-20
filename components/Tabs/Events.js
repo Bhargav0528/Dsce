@@ -15,7 +15,7 @@ class Events extends Component {
   };
 
   state = {events:[],faculty: false, Alert_Visibility: false, timings:'',
-           modal:{url:'',Description:'',contact:'', reg_url:''}, 
+           modal:{url:'',Description:'',contact:'', reg_url:'', title:'', venue:'', timings:'', coordinator:''}, 
            Modal_Visibility: false, description:'', event:'',venue:'', ImageSource: null, contact:'',co_ordinator:'', reg_url:'' }
   
   uploadDetails(){
@@ -74,7 +74,7 @@ const uploadImage = (uri, imageName, mime = 'image/jpg') => {
           co_ordinator:this.state.co_ordinator,
           timings:this.state.timings,
           reg_url:this.state.reg_url,
-          url : 'https://dscebaconclave.com/wp-content/uploads/2018/03/cropped-cropped-logo-2.png'
+          url : 'https://firebasestorage.googleapis.com/v0/b/dsceapp-5ed7f.appspot.com/o/Logo.jpg?alt=media&token=98c38f91-1f5e-4b7a-8760-7fe444049ee9'
         }, ()=>{
           ToastAndroid.show('Event Uploaded', ToastAndroid.SHORT);
           this.setState({ event:'', ImageSource:null, venue:'', description:'',contact:'',reg_url:'',co_ordinator:'', timings:'' })
@@ -126,12 +126,23 @@ const uploadImage = (uri, imageName, mime = 'image/jpg') => {
     });
   }
 
+  /*
+
+  Event: child.val().Event,
+            url: child.val().url,
+            Description: child.val().Description,
+            Venue: child.val().Venue,
+            co_ordinator: child.val().co_ordinator,
+            timings: child.val().timings,
+            contact:child.val().contact,
+            reg_url:child.val().reg_url
+  */
 
   renderEvent(){
     const { cardViewStyle } = styles;
     return Object.values(this.state.events).map(event =>
       <TouchableOpacity style={{flex:1}} onPress={()=>{ this.setState({modal: {url:event.url, Description:event.Description, contact:event.contact,
-      reg_url:event.reg_url}, Alert_Visibility: true})  }} >
+      reg_url:event.reg_url, title:event.Event, venue:event.Venue, timings:event.timings, coordinator:event.co_ordinator}, Alert_Visibility: true})  }} >
     <Card key={event.Event} style={{
       flex:1,
       backgroundColor : '#fff',
@@ -202,20 +213,42 @@ const uploadImage = (uri, imageName, mime = 'image/jpg') => {
     <Card style={{ width:'100%',flexDirection:'column', alignItems: 'center', justifyContent: 'center', borderRadius:25}}>
     <View style={{ width:'100%',flexDirection:'column',
     alignItems: 'center', justifyContent: 'center', borderRadius:25}}>
-    <View style={{backgroundColor:'orange', width:'100%', alignItems: 'center', justifyContent: 'center', padding:20,borderTopLeftRadius:25, borderTopRightRadius:25}}>
+    <View style={{ width:'100%', alignItems: 'center', justifyContent: 'center', padding:20,borderTopLeftRadius:25, borderTopRightRadius:25, flexDirection:'row'}}>
+        <View style={{alignItems:'center',flex:1}}>
         <TouchableOpacity onPress={
           this.goToViewer.bind(this)
-          } >
-        <View style={{ height:200, width:200}}>
+          } style={{width:'100%'}}>
           <Image source={{uri: this.state.modal.url}}
-            style={{flex: 1, height: undefined, width: undefined }}/>
-            </View>
+            style={{height: 100, width: '100%',resizeMode:'contain' }}/>
             </TouchableOpacity>
+            </View>
+          <View style={{flexDirection:'column',width:'70%', paddingLeft:20}}>
+            <Text style={{fontSize:24,color:'#000'}}>{this.state.modal.title}</Text>
+            <View style={{alignItems:'flex-start'}}>
+              <View style={{flexDirection:'row'}}>
+                <Text style={{fontSize:16,color:'#000'}}>Contact:  </Text>
+                <Text style={{fontSize:16,color:'#272727',}}>{this.state.modal.contact}</Text>
+              </View>
+              <View style={{flexDirection:'row'}}>
+                <Text style={{fontSize:16,color:'#000'}}>Venue:  </Text>
+                <Text style={{fontSize:16,color:'#272727',}}>{this.state.modal.venue}</Text>
+              </View>
+              <View style={{flexDirection:'row'}}>
+                <Text style={{fontSize:16,color:'#000'}}>Timings:  </Text>
+                <Text style={{fontSize:16,color:'#272727'}}>{this.state.modal.timings}</Text>
+              </View>
+              <View style={{flexDirection:'row'}}>
+                <Text style={{fontSize:16,color:'#000'}}>Coordinators:  </Text>
+                <Text style={{fontSize:16,color:'#272727'}}>{this.state.modal.coordinator}</Text>
+              </View>
+            </View>
+          </View>
+
     </View>
-          <Text style={{fontSize:18,color:'#000', paddingTop:10}}>Description</Text>
-          <Text style={{fontSize:16,color:'#272727', paddingLeft:20,paddingRight:20, paddingTop:5}}>{this.state.modal.Description}</Text>
-          <Text style={{fontSize:18,color:'#000'}}>Contact Number</Text>
-          <Text style={{fontSize:16,color:'#272727', paddingLeft:20,paddingRight:20, paddingTop:3, paddingBottom:10}}>{this.state.modal.contact}</Text>
+          <View style={{marginTop:10, backgroundColor:'#272727',alignItems:'center',width:'100%'}}>
+              <Text style={{fontSize:18,color:'#fff', paddingTop:10}}>Description</Text>
+              <Text style={{fontSize:16,color:'#E0E0E0', paddingLeft:20,paddingRight:20, paddingTop:5, textAlign:'center',paddingBottom:15}}>{this.state.modal.Description}</Text>
+          </View>
           <TouchableOpacity style={{width:'100%'}} onPress={
             () => { this.showWebView(!this.state.Alert_Visibility)}
             }>

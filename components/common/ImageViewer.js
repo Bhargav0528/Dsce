@@ -37,11 +37,12 @@ handleBackButtonClick() {
     const uri = this.props.navigation.getParam('uri','No-uri');
     console.log("State:",this.state.uri)
     return(
-      <ImageBackground
-        source={require('../../Resources/Images/background_white.jpg')}
+      <View
+        
         style={{width: '100%',
         height: '100%',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor:'#272727'
         }}>
       <PinchZoomView >
         <Image
@@ -52,7 +53,7 @@ handleBackButtonClick() {
           source={{uri: uri}}
         />
       </PinchZoomView>
-      </ImageBackground>
+      </View>
       );
   }
 }
