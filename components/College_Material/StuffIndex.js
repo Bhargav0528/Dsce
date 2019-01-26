@@ -148,6 +148,27 @@ class StuffIndex extends Component {
                 <Text style={{ alignItems: 'center' }}>Student Feedback</Text>
               </Card>
             </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() =>
+                this.props.navigation.navigate('QuestionandAns', {
+                  screen: 'QuestionandAns',
+                })
+              }>
+              <Card
+                style={{
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  borderRadius: 20,
+                  padding: 15,
+                }}>
+                <Image
+                  source={require('../../Resources/Images/qanda.png')}
+                  style={{ width: 100, height: 100 }}
+                />
+                <Text style={{ alignItems: 'center' }}>Daily Questions</Text>
+              </Card>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>

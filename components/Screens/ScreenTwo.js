@@ -7,6 +7,7 @@ import Notes from '../College_Material/Notes.js';
 import ExamSection from '../College_Material/ExamSection';
 import ExamUploads from '../College_Material/ExamUploads';
 import StudentFeedback from '../College_Material/StudentFeedback';
+import QuestionandAns from '../College_Material/QuestionandAns';
 import ImageViewer from '../common/ImageViewer';
 import { createStackNavigator } from 'react-navigation';
 class ScreenTwo extends Component {
@@ -30,7 +31,8 @@ const Stack = createStackNavigator({
   ExamSection: {screen:ExamSection},
   ExamUploads: {screen: ExamUploads},
   ImageViewer: {screen: ImageViewer},
-  StudentFeedback: {screen: StudentFeedback}
+  StudentFeedback: {screen: StudentFeedback},
+  QuestionandAns: {screen: QuestionandAns}
   }
 )
 

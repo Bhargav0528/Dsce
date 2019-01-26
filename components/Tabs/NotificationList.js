@@ -8,40 +8,40 @@ class NotificationList extends React.Component {
 
   f = 1;
 
-  
-  constructor(props) {
-    super(props);
-    this.f = PixelRatio.getFontScale()
-  }
-
-
-  DescriptionModal(){
-    return(
-      <View style={{flex:1,justifyContent: 'center' ,alignItems: 'center'}}>
-    <Modal
-          visible={this.state.DescriptionVisibility}
-          transparent={true}
-          animationType={"fade"}
-          onRequestClose={ () => { this.closeDescription(!this.state.DescriptionVisibility)} } >
-    <View style={{justifyContent: 'center' ,alignItems: 'center',
-    backgroundColor: '#00000070',width:'100%', height:'100%'}}>
-    <View style={{width:'70%',height:'40%',alignItems:'center',justifyContent:'center'}}>
-    <Card style={{ width:'100%', height:'100%',flexDirection:'column', alignItems: 'center', justifyContent: 'center', borderRadius:25, borderWidth:0,borderColor:'orange'}}>
-      
-      <View style={{height:'50%',width:'100%', backgroundColor:'orange', borderTopLeftRadius:25, borderTopRightRadius:25, justifyContent:'center', alignItems:'center'}} >
-      <Text style={{color:'#000', padding:10, fontSize:22, textAlign:'center'}}>{data.text}</Text>
-      </View>
-      <View style={{height:'50%'}}>
-      <Text style={{color:'#000', padding:10, fontSize:16,textAlign:'center'}}>{data.description}</Text>
-      </View>
     
-   </Card>
-   </View>
-   </View>
-   </Modal>
-   </View>
-    )
-  }
+    constructor(props) {
+      super(props);
+      this.f = PixelRatio.getFontScale()
+    }
+
+
+    DescriptionModal(){
+      return(
+        <View style={{flex:1,justifyContent: 'center' ,alignItems: 'center'}}>
+      <Modal
+            visible={this.state.DescriptionVisibility}
+            transparent={true}
+            animationType={"fade"}
+            onRequestClose={ () => { this.closeDescription(!this.state.DescriptionVisibility)} } >
+      <View style={{justifyContent: 'center' ,alignItems: 'center',
+      backgroundColor: '#00000070',width:'100%', height:'100%'}}>
+      <View style={{width:'70%',height:'40%',alignItems:'center',justifyContent:'center'}}>
+      <Card style={{ width:'100%', height:'100%',flexDirection:'column', alignItems: 'center', justifyContent: 'center', borderRadius:25, borderWidth:0,borderColor:'orange'}}>
+        
+        <View style={{height:'50%',width:'100%', backgroundColor:'orange', borderTopLeftRadius:25, borderTopRightRadius:25, justifyContent:'center', alignItems:'center'}} >
+        <Text style={{color:'#000', padding:10, fontSize:22, textAlign:'center'}}>{data.text}</Text>
+        </View>
+        <View style={{height:'50%'}}>
+        <Text style={{color:'#000', padding:10, fontSize:16,textAlign:'center'}}>{data.description}</Text>
+        </View>
+      
+    </Card>
+    </View>
+    </View>
+    </Modal>
+    </View>
+      )
+    }
   showDescription(){
     this.setState({DescriptionVisibility:true})
   }
@@ -98,15 +98,18 @@ class NotificationList extends React.Component {
     require('../../Resources/Images/Category/notes.png')]
     const colorArray = ['blue','orange','red','black','green']
     return(
-      <TouchableOpacity onPress={this.showDescription.bind(this)} >
-      {this.DescriptionModal()}
+      
+      
       <Card style={cardViewStyle}>
+      {this.DescriptionModal()}
       <View style={{ justifyContent:'center',width:'15%',borderTopLeftRadius: 10,borderBottomLeftRadius:10, backgroundColor:'#272727'}}>
         <View style={{height:50,padding:5, justifyContent:'center',backgroundColor:'#272727'}}>
           <Image source={imgArray[parseInt(data.category)]} style={{width:undefined,height:undefined, flex:1, tintColor:'orange'}} resizeMode='contain'/>
         </View>
         </View>
+        
         <CardSection style={{backgroundColor : '#fff', flexDirection:'column', borderRadius: 10,width:'90%'}}>
+        <TouchableOpacity onPress={this.showDescription.bind(this)} >
           <View style={{width:'90%',flexDirection:'row',justifyContent:'space-between'}}>
           <Text style={{width:'80%',fontSize:this.f*18, color:'#000000', fontStyle:'normal'}} numberOfLines={2} ellipsizeMode="tail">{data.text}</Text>
           <Text style={{fontSize:this.f*14, color:'#2979FF', fontStyle:'normal'}} >{this.showTime(data)}</Text>
@@ -114,11 +117,11 @@ class NotificationList extends React.Component {
           <View style={{width:'95%'}}>
           <Text  numberOfLines={2} ellipsizeMode="tail" style={{paddingRight:10}}>{description}</Text>
           </View>
-         
+      
+        </TouchableOpacity>
         </CardSection>
-        
       </Card>
-      </TouchableOpacity>
+      
       );
   }
 }
