@@ -87,9 +87,9 @@ export default class SignUpForm extends Component {
           <View style={{ flex: 1 , backgroundColor:'#fff', alignItems: 'center', justifyContent:'space-around'}}>
           <ImageBackground source={require('../../Resources/Images/gradien2.jpg')} style={{flex :2,width:'100%', alignItems:'center', justifyContent:'center'}} >
               <Image source={require('../../Resources/Images/dsce_logo.png')} style={{width:100, height:100}} />
-              <Text style={{fontSize:36, color:'#fff'}}>Dsce App</Text>
+              <Text style={{fontSize:36, color:'#fff'}}>CAMPUS CONNECT</Text>
               <View style={{alignItems:'center'}}>
-              <Text style={{fontSize:16, color:'#fff'}}>Notifications, Event Alerts and Notes</Text>
+              <Text style={{fontSize:16, color:'#fff'}}>Event Alerts, Timetable and Notes</Text>
               </View>
           </ImageBackground>
 

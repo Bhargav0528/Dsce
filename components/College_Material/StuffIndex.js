@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  ToastAndroid
 } from 'react-native';
 import { Button, Card } from '../common';
 class StuffIndex extends Component {
@@ -102,9 +103,12 @@ class StuffIndex extends Component {
             <TouchableOpacity
               style={styles.button}
               onPress={() =>
-                this.props.navigation.navigate('ExamSection', {
-                  screen: 'ExamSection',
-                })
+                //this.props.navigation.navigate('ExamSection', {
+                 // screen: 'ExamSection',
+                //})
+                {
+                  ToastAndroid.show("This feature will be available in future updates", ToastAndroid.LONG)
+                }
               }>
               <Card
                 style={{
@@ -130,9 +134,12 @@ class StuffIndex extends Component {
             <TouchableOpacity
               style={styles.button}
               onPress={() =>
-                this.props.navigation.navigate('StudentFeedback', {
-                  screen: 'StudentFeedback',
-                })
+               // this.props.navigation.navigate('StudentFeedback', {
+               //   screen: 'StudentFeedback',
+                //})
+                {
+                  ToastAndroid.show("This feature will be available in future updates", ToastAndroid.LONG)
+                }
               }>
               <Card
                 style={{

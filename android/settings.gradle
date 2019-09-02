@@ -1,4 +1,8 @@
 rootProject.name = 'DSCEApp'
+include ':react-native-linear-gradient'
+project(':react-native-linear-gradient').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-linear-gradient/android')
+include ':react-native-screen-orientation', ':app'
+project(':react-native-screen-orientation').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-screen-orientation/android')
 include ':react-native-onesignal'
 project(':react-native-onesignal').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-onesignal/android')
 include ':react-native-image-picker'
@@ -9,7 +13,6 @@ include ':react-native-fetch-blob'
 project(':react-native-fetch-blob').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fetch-blob/android')
 include ':react-native-document-picker'
 project(':react-native-document-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-document-picker/android')
-include ':react-native-orientation', ':app'
-project(':react-native-orientation').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-screen-orientation/android')
-
+include ':react-native-linear-gradient'
+project(':react-native-linear-gradient').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-linear-gradient/android')
 include ':app'

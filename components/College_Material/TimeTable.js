@@ -5,7 +5,6 @@ import {
   View,
   Image,
   Text,
-  Dimensions,
   ScrollView,
   BackHandler,
   Picker,
@@ -44,14 +43,9 @@ export default class TimeTable extends Component{
 componentWillMount() {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick)
     console.log("Will Mount")
-    this.setState({uid: firebase.auth().currentUser.uid})
+    //this.setState({uid: firebase.auth().currentUser.uid})
     console.log(this.state.faculty)
-    if(!this.state.faculty==true && !this.state.faculty=='')
-    {
-      console.log(this.state.faculty)
-    //firebase.database().ref().child('users').child(firebase.auth().currentUser.uid).on('value', (snapshot)=>{firebase.database().ref(`branch/${snapshot.val().branch}/timetable/sem_${snapshot.val().sem}/${snapshot.val().section}/url`).on('value', (snapshot1)=>{this.setState({uri: snapshot1.val()})})})
-    firebase.database().ref().child('users').child(firebase.auth().currentUser.uid).on('value', (snapshot)=>{firebase.database().ref(`branch/${snapshot.val().branch}/timetable/sem_${snapshot.val().sem}/B`).on('value', (snapshot1)=>{this.setState({ttdata: snapshot1.val(), branch: snapshot.val().branch})})})
-    }
+    
   }
 
 componentWillUnmount() {
@@ -65,7 +59,34 @@ handleBackButtonClick() {
 }
 
   firebaseUpload(){
-    firebase.database().ref(`branch/computer_science/timetable/sem_4/B`).set({
+    if(this.state.sem=="1" || this.state.sem == "2")
+    {
+      firebase.database().ref(`firstyear/timetable/sem_${this.state.sem}/${this.state.section}`).set({
+        Mon: this.state.tableDat[0].slice(1,this.state.tableDat[0].length).join(','),
+        Tue: this.state.tableDat[1].slice(1,this.state.tableDat[1].length).join(','),
+        Wed: this.state.tableDat[2].slice(1,this.state.tableDat[2].length).join(','),
+        Thu: this.state.tableDat[3].slice(1,this.state.tableDat[3].length).join(','),
+        Fri: this.state.tableDat[4].slice(1,this.state.tableDat[4].length).join(','),
+        Sat: this.state.tableDat[5].slice(1,this.state.tableDat[5].length).join(','),
+      },()=>{
+        firebase.database().ref('news/' + (99999999999-Math.floor(Date.now() / 1000))).set({
+          category: 3,
+          text: `TimeTable has been altered for ${this.state.branchModify[this.state.branch]}, Sem ${this.state.sem}`,
+          description : `Please refer the timetable, TimeTable has been altered for ${this.state.branchModify[this.state.branch]}, Sem ${this.state.sem} Section - ${this.state.section}.`,
+          year:new Date().getFullYear(),
+          month:new Date().getMonth(),
+          date:new Date().getDate(),
+          hour:new Date().getHours(),
+          minutes:new Date().getMinutes()
+        }, ()=>{
+          this.setState({edit:false})
+        });
+        
+      })
+    }
+    else
+    {
+    firebase.database().ref(`branch/computer_science/timetable/sem_${this.state.sem}/${this.state.section}`).set({
       Mon: this.state.tableDat[0].slice(1,this.state.tableDat[0].length).join(','),
       Tue: this.state.tableDat[1].slice(1,this.state.tableDat[1].length).join(','),
       Wed: this.state.tableDat[2].slice(1,this.state.tableDat[2].length).join(','),
@@ -87,23 +108,32 @@ handleBackButtonClick() {
       });
       
     })
-    
+  }
   }
 
  componentDidMount(){
   Orientation.lockToLandscape();
     console.log('Calleddd?')
-    firebase.database().ref(`branch/${this.state.user.branch}`).on('value', (snapshot)=>{ 
-      firebase.database().ref().child('users').child(firebase.auth().currentUser.uid).on('value', (snap)=>{
+    firebase.database().ref().child('users').child(firebase.auth().currentUser.uid).on('value', 
+      (snap)=>{
+    firebase.database().ref(`branch/${snap.val().branch}`).on('value', (snapshot)=>{ 
         if(snap.val().faculty == true)
         {
           this.setState({faculty:snap.val().faculty, branch:snap.val().branch})
-          
         }
         else{
-          console.log(`branch/${snap.val().branch}/sem_${snap.val().sem}/B`)
-          firebase.database().ref(`branch/${snap.val().branch}/timetable/sem_${snap.val().sem}/B`)
-          .on('value', (snapshot1)=>{this.setState({ttdata: snapshot1.val(), branch: snap.val().branch})})
+          //console.log(`branch/${snap.val().branch}/sem_${snap.val().sem}/B`)
+          if(snap.val().sem == "1" || snap.val().sem == "2")
+          {
+            firebase.database().ref(`firstyear/timetable/sem_${snap.val().sem}/${snap.val().section}`).on('value', 
+          (snapshot1)=>{this.setState({ttdata: snapshot1.val(), branch: snapshot.val().branch, uid: firebase.auth().currentUser.uid, sem: snap.val().sem,
+          section: snap.val().section})})
+          }
+          else{
+            firebase.database().ref(`branch/${snap.val().branch}/timetable/sem_${snap.val().sem}/${snap.val().section}`).on('value', 
+          (snapshot1)=>{this.setState({ttdata: snapshot1.val(), branch: snapshot.val().branch, uid: firebase.auth().currentUser.uid, sem: snap.val().sem,
+            section: snap.val().section})})
+          }
         }
       this.uri =  snapshot.val()})
     })

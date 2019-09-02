@@ -3,6 +3,8 @@ package com.dsceapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.BV.LinearGradient.LinearGradientPackage;
+import com.github.yamill.orientation.OrientationPackage;
 import com.imagepicker.ImagePickerPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
@@ -19,6 +21,7 @@ import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import com.github.yamill.orientation.OrientationPackage; 
+import com.BV.LinearGradient.LinearGradientPackage;
 
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.facebook.react.ReactNativeHost;
@@ -42,6 +45,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new LinearGradientPackage(),
+            new OrientationPackage(),
             new ImagePickerPackage(),
             new RNFirebasePackage(),
             new RNFetchBlobPackage(),
@@ -49,7 +54,7 @@ public class MainApplication extends Application implements ReactApplication {
             new ReactNativeOneSignalPackage(),
               new RNFirebaseMessagingPackage(),
               new RNFirebaseNotificationsPackage(),
-              new OrientationPackage()
+              new LinearGradientPackage() 
       );
     }
 

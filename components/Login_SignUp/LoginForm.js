@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, Image, Text, ImageBackground,TextInput, Keyboard,PixelRatio, TouchableOpacity, ToastAndroid, TouchableWithoutFeedback } from 'react-native';
+import { View, Image, Text, ImageBackground,TextInput, Keyboard,PixelRatio,Dimensions, TouchableOpacity, ToastAndroid, TouchableWithoutFeedback } from 'react-native';
 import { CardSection, Button, Card, Input, Spinner } from '../common';
 import MainScreen from '../Screens/MainScreen';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import { KeyboardAwareView } from 'react-native-keyboard-aware-view'
 import firebase from 'firebase';
-
+import LinearGradient from 'react-native-linear-gradient'
 //TODO -----> All designs Done ( Color Changes if Required )
 
 
@@ -21,6 +21,8 @@ export default class LoginForm extends Component {
     loginSpinner:false, 
     usns:"" };
   f = 1;
+  w = Dimensions.get('window').width;
+  h = Dimensions.get('window').height;
   constructor(props) {
     super(props);
     this.f = PixelRatio.getFontScale()
@@ -68,8 +70,7 @@ export default class LoginForm extends Component {
         }}
         >
         
-      <ImageBackground
-        source={require('../../Resources/Images/background_text5.png')}
+      <View
         style={
           {
             flex:1,
@@ -77,20 +78,31 @@ export default class LoginForm extends Component {
         height: null,
         alignItems: 'center'
         }}>
-        <View style={{flex:2}}>
-          <Image
-          source={require('../../Resources/Images/blackhat1.png')}
+         <Image
+          source={require('../../Resources/Images/logo_bggr.png')}
           style={{
-            height: '60%',
-            width: 200,
-            marginTop: 60,
-            marginBottom: 40,
-            resizeMode:'contain',
+            position:'absolute',
+            top:0,
+            left:0,
+            height: this.h*0.40,
+            width: this.w,
+            borderBottomLeftRadius:this.w*0.35,
+            borderBottomRightRadius:this.w*0.35,
+            resizeMode:'cover'
+          }}
+        /> 
+
+          <Image
+          source={require('../../Resources/Images/Campusconnect_trans.png')}
+          style={{
+            height: this.h*0.40,
+            width: this.w*0.80,
+            marginBottom: 10,
+            resizeMode:'cover'
           }}
         />
-        </View>
         
-        <View style={{flex:3,alignItems:'center', width:'85%'}}>
+        <View style={{alignItems:'center', width:'85%', flex:1}}>
         <Card
           style={{
             flexDirection: 'column',
@@ -98,18 +110,14 @@ export default class LoginForm extends Component {
             borderRadius: 20,
             borderWidth: 1,
             borderColor: '#fff',
-            flex:3,
-            width:'100%'
+            width:'100%',
+            flex:1,
           }}>
-          <Card
-            style={{
-              shadowRadius: 2,    
-              shadowOffset: { width: 12, height: 12 },
-              borderRadius: 20,
-              borderWidth: 1,
-              borderColor: '#fff',
-              elevation: 12,
-            }}>
+
+<LinearGradient colors={['#F88111', '#FF9538']} start={{ x: 0, y: 1 }}
+  end={{ x: 1, y: 1 }} style={{height:55, width:'100%',borderRadius: 20,flexDirection:'row', marginBottom:10}} >
+          
+
             <View
               style={{
                 alignItems: 'center',
@@ -117,8 +125,8 @@ export default class LoginForm extends Component {
                 flex: 2,
                 flexDirection: 'column',
               }}>
-              <Button btpress={this.loginbtnPress.bind(this)}>
-                <Text>Login</Text>
+              <Button style={{backgroundColor:'transparent', borderWidth:0}} btpress={this.loginbtnPress.bind(this)}>
+                <Text style={{fontSize:18, fontFamily:'montserrat_eb'}}>Login</Text>
               </Button>
               {this.renderUnderlineLogin()}
               
@@ -129,21 +137,26 @@ export default class LoginForm extends Component {
                 justifyContent: 'center',
                 flex: 2,
               }}>
-              <Button btpress={this.signupbtnPress.bind(this)}>
-                SignUp
+              <Button style={{backgroundColor:'transparent', borderWidth:0}} btpress={this.signupbtnPress.bind(this)}>
+                <Text style={{fontSize:18}}>SignUp</Text>
               </Button>
               {this.renderUnderlineSignUp()}
             </View>
-          </Card>
+            
+          </LinearGradient>
           <View style={{ alignItems:'center' }}>
-          <CardSection >
+          <View >
             {this.renderTabs()}
-          </CardSection>
+          </View>
           </View>
           
         </Card>
+              
+        {this.renderAdditionalButtons() }
+        
+        
         </View>
-      </ImageBackground>
+      </View>
       
 
       </GestureRecognizer>
@@ -153,7 +166,62 @@ export default class LoginForm extends Component {
   }
 
   
+  renderAdditionalButtons()
+  {
+      if(this.state.loginPress)
+      {
+        return <View style={{flexDirection:'row',marginBottom:10,alignItems:'center', justifyContent:'space-around'}}>
+           
+           <TouchableOpacity activeOpacity = { .5 } style={{width:'60%', height:'100%', alignItems:'center'}} onPress={()=>{ this.props.navigation.navigate('FacultyLogin', {screen:'FacultyLogin'}) }}>
+ 
+            <LinearGradient colors={['#F88111', '#FF9538']} start={{ x: 0, y: 1 }}
+  end={{ x: 1, y: 1 }} style={{
+                height: 40,
+                paddingLeft: 15,
+                paddingRight: 15,
+                borderRadius: 20,
+                marginTop:10,
+                width:'80%'
+                }} >
+ 
+                  <Text style={{ fontSize: 16,
+                                textAlign: 'center',
+                                margin: 7,
+                                color : '#272727',
+                                fontWeight: '600',
+                                backgroundColor: 'transparent' }}> Faculty Login</Text>
+                  
+            </LinearGradient>
+        
+        </TouchableOpacity>
+           
+          
+        <TouchableOpacity activeOpacity = { .5 } style={{width:'60%', height:'100%', alignItems:'center'}} onPress={()=>{ this.forgotPassword.bind(this) } }>
+ 
+ <LinearGradient colors={['#F88111', '#FF9538']} start={{ x: 0, y: 1 }}
+end={{ x: 1, y: 1 }} style={{
+     height: 40,
+     paddingLeft: 2,
+     paddingRight: 2,
+     borderRadius: 20,
+     marginTop:10,
+     width:'80%'
+     }} >
 
+       <Text style={{ fontSize: 16,
+                     textAlign: 'center',
+                     margin: 7,
+                     color : '#272727',
+                     fontWeight: '600',
+                     backgroundColor: 'transparent' }}> Forgot Password</Text>
+       
+ </LinearGradient>
+
+</TouchableOpacity>
+          </View>
+
+            }
+  }
 
 
   loginbtnPress() {
@@ -201,17 +269,17 @@ export default class LoginForm extends Component {
              email: this.state.email,
              infoSetup: false,
              usn: usn_upper
-            })
-            .then(()=>{navigate('SignUpForm', { screen: 'SignUpForm' })})
-            .catch(() => {
-              //Function Binding is very necessary in JS as onLoginFail is not bound to the class
-              ToastAndroid.show('Invalid Credentials', ToastAndroid.SHORT);
-            });
-          }
+            },()=>{navigate('SignUpForm', { screen: 'SignUpForm' })})
+            
           
           }
-          )
-        }
+          
+        })
+        .catch(() => {
+          //Function Binding is very necessary in JS as onLoginFail is not bound to the class
+          ToastAndroid.show('Invalid Credentials', ToastAndroid.SHORT);
+        });
+      }
         else
         {
           ToastAndroid.show('Duplicate USN Found', ToastAndroid.SHORT);
@@ -275,21 +343,29 @@ export default class LoginForm extends Component {
     {
     return (
       
-      <Button
-        btpress={this.firebaseSignIn.bind(this)}
-        style={{
-          borderRadius: 20,
-          borderWidth: 2,
-          borderColor: '#f5861f',
-          paddingLeft: 30,
-          paddingRight: 30,
-          backgroundColor: '#f5861f',
-          color: '#ffffff',
-          elevation: 2,
-          width:'90%',
-        }}>
-        {<Text style={{ color: '#fff', width:100, fontSize:17 }}>Sign In</Text>}
-      </Button>
+      <TouchableOpacity activeOpacity = { .5 } style={{width:'100%', height:'100%', alignItems:'center'}} onPress={this.firebaseSignIn.bind(this)}>
+ 
+            <LinearGradient colors={['#F88111', '#FF9538']} start={{ x: 0, y: 1 }}
+  end={{ x: 1, y: 1 }} style={{
+                height: 40,
+                paddingLeft: 15,
+                paddingRight: 15,
+                borderRadius: 20,
+                marginTop:10,
+                elevation: 6,
+                width:'80%'
+                }} >
+ 
+                  <Text style={{ fontSize: 18,
+                                textAlign: 'center',
+                                margin: 7,
+                                color : '#fff',
+                                fontWeight: '600',
+                                backgroundColor: 'transparent' }}> Sign In</Text>
+                  
+            </LinearGradient>
+        
+        </TouchableOpacity>
     )
     }
     else{
@@ -353,48 +429,10 @@ export default class LoginForm extends Component {
               secureTextEntry={true}
             />
           </Card>
-          
-       
-
         </View>
         
-          
-          <CardSection style={{ justifyContent: 'center', alignItems:'center' }}>
+          <View style={{ justifyContent: 'center', alignItems:'center' }}>
             {this.renderButtonSignIn()}
-          </CardSection>
-
-          <View style={{flexDirection:'row',marginTop:7,alignItems:'center', justifyContent:'space-around'}}>
-           
-           <Button
-                btpress={()=>{ this.props.navigation.navigate('FacultyLogin', {screen:'FacultyLogin'}) }}
-                style={{
-                borderRadius: 20,
-                borderWidth: 2,
-                paddingLeft:7,
-                paddingRight:7,
-                borderColor: '#FFE0B2',
-                backgroundColor: '#FFE0B2',
-                color: '#000',
-                elevation: 6,
-              }}>
-        {<Text style={{ color: '#000' }}>Faculty Login </Text>}
-      </Button>
-         
-          
-           <Button
-                btpress={this.forgotPassword.bind(this)}
-                style={{
-                borderRadius: 20,
-                borderWidth: 2,
-                paddingLeft:5,
-                paddingRight:5,
-                borderColor: '#FFE0B2',
-                backgroundColor: '#FFE0B2',
-                color: '#ffffff',
-                elevation: 6,
-              }}>
-        {<Text style={{ color: '#000' }}>Forgot Password</Text>}
-      </Button>
           </View>
         </View>
       );
@@ -459,9 +497,9 @@ export default class LoginForm extends Component {
             secureTextEntry={true}
           />
         </Card>
-        <CardSection style={{ alignItems: 'center' }}>
+        <View style={{ alignItems: 'center' }}>
           {this.renderButtonSignUp()}
-        </CardSection>
+        </View>
       </View>
     );
   }

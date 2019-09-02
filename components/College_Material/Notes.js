@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Image,Modal, TouchableOpacity,StyleSheet, ScrollView, Platform,Picker, ToastAndroid } from 'react-native';
 import { Gradient, Card, InputForm, InputPicker } from '../common'
 import RNFetchBlob from 'react-native-fetch-blob'
-import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker';
+import DocumentPicker from 'react-native-document-picker';
 import firebase from 'firebase'
 class Notes extends Component {
   static navigationOptions = {
@@ -16,17 +16,32 @@ class Notes extends Component {
 
   componentDidMount(){
     firebase.database().ref().child('users').child(firebase.auth().currentUser.uid).on('value', 
-    (snapshot)=>{firebase.database().ref(`branch/${snapshot.val ().branch}/notes/sem_${snapshot.val().sem}`).on('value', 
-    (snapshot1)=>{
+    (snapshot)=>{
       if(snapshot.val().faculty)
       {
         this.setState({ faculty: snapshot.val().faculty, branch: snapshot.val().branch})
       }
       else
       {
+        if(snapshot.val().sem == "1" || snapshot.val().sem == "2")
+        {
+          firebase.database().ref(`firstyear/notes/sem_${snapshot.val().sem}`).on('value', 
+          (snapshot1)=>{
+            this.setState({subjects: snapshot1.val(), faculty: snapshot.val().faculty})
+            
+          })
+        }
+        else
+        {
+          firebase.database().ref(`branch/${snapshot.val ().branch}/notes/sem_${snapshot.val().sem}`).on('value', 
+    (snapshot1)=>{
       this.setState({subjects: snapshot1.val(), faculty: snapshot.val().faculty})
+      
+    })
+        }
       }
-    })})
+      
+  })
   }
 
   uploadDetails(){
@@ -303,6 +318,10 @@ class Notes extends Component {
 
 
   renderSubjects(){
+    if(this.state.subjects == null)
+    {
+      return <Text style={{fontSize:22, color:'#000', alignSelf:'center'}}>NOTES NOT AVAILABLE</Text>
+    }
     var subjects = Object.keys(this.state.subjects)
     return subjects.map(noti =>
       <View key={noti}>
@@ -377,8 +396,8 @@ class Notes extends Component {
   }
 
   selectNote2Upload() {
-    DocumentPicker.show({
-      filetype: [DocumentPickerUtil.allFiles()],
+    DocumentPicker.pick({
+      type: [DocumentPicker.types.allFiles],
     },(error,res) => {
       // Android
       this.setState({ NoteSource:res.uri, mimeType:res.type})

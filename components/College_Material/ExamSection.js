@@ -270,7 +270,8 @@ class ExamSection extends Component {
         {
           console.log('Into it')
         firebase.database().ref(`branch/${snap.val().branch}/exam_uploads/sem_${snap.val().sem}`).on('value', (snapshot)=>{
-      
+        
+          console.log("Exam Content", snapshot.val())
   
       this.setState({
         
