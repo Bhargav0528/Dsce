@@ -3,6 +3,8 @@ import { Text, View, Image,Modal, TouchableOpacity,StyleSheet, ScrollView, Platf
 import { Gradient, Card, InputForm, InputPicker } from '../common'
 import RNFetchBlob from 'react-native-fetch-blob'
 import DocumentPicker from 'react-native-document-picker';
+
+
 import firebase from 'firebase'
 class Notes extends Component {
   static navigationOptions = {
@@ -395,13 +397,22 @@ class Notes extends Component {
     
   }
 
-  selectNote2Upload() {
-    DocumentPicker.pick({
-      type: [DocumentPicker.types.allFiles],
-    },(error,res) => {
-      // Android
-      this.setState({ NoteSource:res.uri, mimeType:res.type})
-    });
+  async selectNote2Upload() {
+    // Pick a single fileDocumentPicker.show(
+      try {
+        const res = await DocumentPicker.pick({
+          type: [DocumentPicker.types.allFiles],
+        });
+        this.setState({ NoteSource:res.uri, mimeType:res.type})
+      } catch (err) {
+        if (DocumentPicker.isCancel(err)) {
+          // User cancelled the picker, exit any dialogs or menus and move on
+        } else {
+          throw err;
+        }
+      }
+      
+      
   }
 
   ModalNotes(){

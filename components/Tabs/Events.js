@@ -19,6 +19,15 @@ class Events extends Component {
            Modal_Visibility: false, description:'', event:'',venue:'', ImageSource: null, contact:'',co_ordinator:'', reg_url:'' }
   
   uploadDetails(){
+    let regUrl = this.state.reg_url;
+    if(regUrl.startsWith("http"))
+    {
+      console.log("Correct URL ", regUrl)
+    }
+    else
+    {
+      regUrl = "http://"+regUrl
+    }
     const Blob = RNFetchBlob.polyfill.Blob
     const fs = RNFetchBlob.fs
     window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
@@ -48,7 +57,7 @@ const uploadImage = (uri, imageName, mime = 'image/jpg') => {
           Description : this.state.description,
           contact:this.state.contact,
           co_ordinator:this.state.co_ordinator,
-          reg_url:this.state.reg_url,
+          reg_url:regUrl,
           timings:this.state.timings,
           url : url
         }, ()=>{

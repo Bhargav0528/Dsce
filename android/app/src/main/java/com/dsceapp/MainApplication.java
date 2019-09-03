@@ -3,17 +3,16 @@ package com.dsceapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.github.elyx0.reactnativedocumentpicker.DocumentPickerPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.imagepicker.ImagePickerPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
-import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.imagepicker.ImagePickerPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
-import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 import com.imagepicker.ImagePickerPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
@@ -45,12 +44,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new DocumentPickerPackage(),
             new LinearGradientPackage(),
             new OrientationPackage(),
             new ImagePickerPackage(),
             new RNFirebasePackage(),
             new RNFetchBlobPackage(),
-            new ReactNativeDocumentPicker(),
             new ReactNativeOneSignalPackage(),
               new RNFirebaseMessagingPackage(),
               new RNFirebaseNotificationsPackage(),
